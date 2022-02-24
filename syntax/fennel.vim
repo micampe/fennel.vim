@@ -47,7 +47,9 @@ syn keyword FennelSpecialForm =
 syn keyword FennelSpecialForm >
 syn keyword FennelSpecialForm >=
 syn keyword FennelSpecialForm ^
+syn keyword FennelSpecialForm accumulate
 syn keyword FennelSpecialForm and
+syn keyword FennelSpecialForm collect
 syn keyword FennelSpecialForm comment
 syn keyword FennelSpecialForm do
 syn keyword FennelSpecialForm doc
@@ -58,6 +60,7 @@ syn keyword FennelSpecialForm fn
 syn keyword FennelSpecialForm for
 syn keyword FennelSpecialForm global
 syn keyword FennelSpecialForm hashfn
+syn keyword FennelSpecialForm icollect
 syn keyword FennelSpecialForm if
 syn keyword FennelSpecialForm import-macros
 syn keyword FennelSpecialForm include
