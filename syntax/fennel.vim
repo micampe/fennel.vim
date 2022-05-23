@@ -73,6 +73,7 @@ syn keyword FennelSpecialForm macro
 syn keyword FennelSpecialForm macrodebug
 syn keyword FennelSpecialForm macros
 syn keyword FennelSpecialForm match
+syn keyword FennelSpecialForm match-try
 syn keyword FennelSpecialForm not
 syn keyword FennelSpecialForm not=
 syn keyword FennelSpecialForm or
