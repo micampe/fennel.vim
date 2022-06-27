@@ -4,6 +4,10 @@ Changes start from [f357132](https://github.com/jaawerth/fennel.vim/commit/f3571
 
 * Add correct indentation for `with-open`
 
+### Updates supporting up to Fennel v1.2.0
+
+* Add `fcollect` support/indentation.
+
 ### Updates supporting up to Fennel v1.1.0
 
 * Add `match-try` support/indentation.
