@@ -56,6 +56,7 @@ syn keyword FennelSpecialForm doc
 syn keyword FennelSpecialForm doto
 syn keyword FennelSpecialForm each
 syn keyword FennelSpecialForm eval-compiler
+syn keyword FennelSpecialForm fcollect
 syn keyword FennelSpecialForm fn
 syn keyword FennelSpecialForm for
 syn keyword FennelSpecialForm global
