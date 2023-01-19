@@ -49,6 +49,8 @@ syn keyword FennelSpecialForm >=
 syn keyword FennelSpecialForm ^
 syn keyword FennelSpecialForm accumulate
 syn keyword FennelSpecialForm and
+syn keyword FennelSpecialForm case
+syn keyword FennelSpecialForm case-try
 syn keyword FennelSpecialForm collect
 syn keyword FennelSpecialForm comment
 syn keyword FennelSpecialForm do
