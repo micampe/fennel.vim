@@ -255,7 +255,7 @@ execute 'syn match FennelKeyword "\v:%([' . s:symchar . '])*>"'
 unlet! s:symchar s:symcharnodig
 
 syn match FennelQuote "`"
-syn match FennelQuote "@"
+syn match FennelQuote ","
 
 " FENNEL numbers
 syntax match FennelNumber "\v\c<[-+]?\d*\.?\d*%([eE][-+]?\d+)?>"
