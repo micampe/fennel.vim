@@ -41,6 +41,10 @@ if exists("*searchpairpos")
 		let g:fennel_fuzzy_indent_blacklist = []
 	endif
 
+	if !exists('g:fennel_fuzzy_indent_special_patterns')
+		let g:fennel_fuzzy_indent_special_patterns = ['^do$']
+	endif
+
 	if !exists('g:fennel_special_indent_words')
 		let g:fennel_special_indent_words = ''
 	endif
@@ -236,14 +240,15 @@ if exists("*searchpairpos")
 
 		let ww = w
 
-		if &lispwords =~# '\V\<' . ww . '\>'
-			return [paren[0], paren[1] + &shiftwidth - 1]
-		endif
-
-		if g:fennel_fuzzy_indent
-			\ && !s:match_one(g:fennel_fuzzy_indent_blacklist, ww)
-			\ && s:match_one(g:fennel_fuzzy_indent_patterns, ww)
-			return [paren[0], paren[1] + &shiftwidth - 1]
+		if &lispwords =~# '\V\<' . ww . '\>' || (
+					\ g:fennel_fuzzy_indent
+					\ && !s:match_one(g:fennel_fuzzy_indent_blacklist, ww)
+					\ && s:match_one(g:fennel_fuzzy_indent_patterns, ww))
+			" Disable fuzzy for exceptions like `do` if an expr is on the first line
+			if !(s:match_one(g:fennel_fuzzy_indent_special_patterns, ww)
+						\ && match(getline('.'), '\v<\w+', col('.') -1, 2) != -1)
+				return [paren[0], paren[1] + &shiftwidth - 1]
+			endif
 		endif
 
 		call search('\v\_s', 'cW')
