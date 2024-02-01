@@ -32,7 +32,7 @@ if exists("*searchpairpos")
 	if !exists('g:fennel_fuzzy_indent_patterns')
         let g:fennel_fuzzy_indent_patterns = ['^accumulate$', '^case\(-try\)\=$',
 	      \ '^each$', '^fn$', '^for$', '^faccumulate$', '^fcollect$',
-	      \ '^i\?collect$', '^if', '^global$', '^let', '^lambda$', '^local$',
+	      \ '^i\?collect$', '^global$', '^let', '^lambda$', '^local$',
 	      \ '^macro', '^match\(-try\)\=$', '^while', '^var$',
 	      \ '^with-'] " Any with-foo will indent like `do`
 	endif

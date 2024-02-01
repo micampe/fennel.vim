@@ -25,6 +25,7 @@ setlocal formatoptions-=t
 setlocal comments=n:;
 setlocal commentstring=;\ %s
 
+let &lispwords=join(filter(split(&lispwords, ','), {_, w -> w != 'if'}), ',')
 setlocal lispwords+=collect,icollect,with-open,fcollect,accumulate,faccumulate
 
 let &cpo = s:cpo_save
