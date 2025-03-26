@@ -4,5 +4,5 @@ fun! s:DetectFennel()
     endif
 endfun
 
-autocmd BufRead,BufNewFile *.fnl setlocal filetype=fennel
+autocmd BufRead,BufNewFile *.fnl,*.fnlm setlocal filetype=fennel
 autocmd BufNewFile,BufRead * call s:DetectFennel()
