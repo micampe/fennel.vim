@@ -57,7 +57,15 @@ if exists("*searchpairpos")
 	endfunction
 
 	function! s:ignored_region()
-		return s:syn_id_name() =~? '\vstring|comment|character'
+		if s:syn_id_name() =~? '\vstring|comment|character'
+			return true
+		elseif has('nvim')
+			let captures = v:lua.vim.treesitter.get_captures_at_cursor()
+			return index(captures, 'comment') >= 0 ||
+						\ index(captures, 'string') >= 0
+		else
+			return false
+		endif
 	endfunction
 
 	function! s:current_char()
