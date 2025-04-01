@@ -30,14 +30,19 @@ if exists("*searchpairpos")
 	endif
 
 	if !exists('g:fennel_fuzzy_indent_patterns')
-        let g:fennel_fuzzy_indent_patterns = ['^accumulate$', '^each$',
-              \ '^fn$', '^for$', '^faccumulate$', '^fcollect$', '^i\?collect$', '^if',
-	      \ '^global$', '^let', '^lambda$', '^local$', '^macro', '^match$',
-	      \ '^match-try$', '^while', '^with-open$', '^var$']
+        let g:fennel_fuzzy_indent_patterns = ['^accumulate$', '^case\(-try\)\=$',
+	      \ '^each$', '^fn$', '^for$', '^faccumulate$', '^fcollect$',
+	      \ '^i\?collect$', '^global$', '^let', '^lambda$', '^local$',
+	      \ '^macro', '^match\(-try\)\=$', '^while', '^var$',
+	      \ '^with-'] " Any with-foo will indent like `do`
 	endif
 
 	if !exists('g:fennel_fuzzy_indent_blacklist')
 		let g:fennel_fuzzy_indent_blacklist = []
+	endif
+
+	if !exists('g:fennel_fuzzy_indent_special_patterns')
+		let g:fennel_fuzzy_indent_special_patterns = ['^do$']
 	endif
 
 	if !exists('g:fennel_special_indent_words')
@@ -243,14 +248,15 @@ if exists("*searchpairpos")
 
 		let ww = w
 
-		if &lispwords =~# '\V\<' . ww . '\>'
-			return [paren[0], paren[1] + &shiftwidth - 1]
-		endif
-
-		if g:fennel_fuzzy_indent
-			\ && !s:match_one(g:fennel_fuzzy_indent_blacklist, ww)
-			\ && s:match_one(g:fennel_fuzzy_indent_patterns, ww)
-			return [paren[0], paren[1] + &shiftwidth - 1]
+		if &lispwords =~# '\V\<' . ww . '\>' || (
+					\ g:fennel_fuzzy_indent
+					\ && !s:match_one(g:fennel_fuzzy_indent_blacklist, ww)
+					\ && s:match_one(g:fennel_fuzzy_indent_patterns, ww))
+			" Disable fuzzy for exceptions like `do` if an expr is on the first line
+			if !(s:match_one(g:fennel_fuzzy_indent_special_patterns, ww)
+						\ && match(getline('.'), '\v<\w+', col('.') -1, 2) != -1)
+				return [paren[0], paren[1] + &shiftwidth - 1]
+			endif
 		endif
 
 		call search('\v\_s', 'cW')
